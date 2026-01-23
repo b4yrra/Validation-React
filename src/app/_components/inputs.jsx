@@ -10,29 +10,37 @@ export const Inputs = () => {
     userName: "",
   });
 
-  const [names, setNames] = useState([]);
+  const [names, setNames] = useState({});
 
   const formHandleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // const isValidFirst = formData.firstName !== "";
+  // const isValidLast = formData.lastName !== "";
+  // const isValidUser = formData.userName !== "";
+
   const formDataNames = () => {
-    if (formData.firstName && formData.lastName && formData.userName !== "") {
-      setNames([
-        ...names,
-        formData.firstName,
-        formData.lastName,
-        formData.userName,
-      ]);
+    const isValid = {};
+
+    if (isValid.firstName === "") {
+      return false;
+    } else {
+      return true;
     }
 
-    console.log(names);
+    setNames(isValid);
+    console.log(formData);
+
+    // setNames((prev) => [...prev, isValidFirst]);
+    // setNames((prev) => [...prev, isValidLast]);
+    // setNames((prev) => [...prev, isValidUser]);
   };
 
   return (
     <div className="flex flex-col justify-between items-center h-105">
       <div className="flex flex-col gap-3">
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-1">
           <Tags text={"First Name"} />
           <Input
             onChange={formHandleChange}
