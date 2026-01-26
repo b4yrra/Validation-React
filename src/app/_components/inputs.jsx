@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Input, Tags } from "./tags";
+import { Buttons } from "./Buttons";
 
 export const Inputs = () => {
   const [formData, setFormData] = useState({
@@ -10,31 +11,24 @@ export const Inputs = () => {
     userName: "",
   });
 
-  const [names, setNames] = useState({});
+  const [error, setError] = useState({});
 
   const formHandleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // const isValidFirst = formData.firstName !== "";
-  // const isValidLast = formData.lastName !== "";
-  // const isValidUser = formData.userName !== "";
-
-  const formDataNames = () => {
+  const handleNames = () => {
     const isValid = {};
-
-    if (isValid.firstName === "") {
-      return false;
-    } else {
-      return true;
+    if (formData.firstName === "") {
+      isValid.firstName = "Нэрээ оруулна уу";
     }
-
-    setNames(isValid);
-    console.log(formData);
-
-    // setNames((prev) => [...prev, isValidFirst]);
-    // setNames((prev) => [...prev, isValidLast]);
-    // setNames((prev) => [...prev, isValidUser]);
+    if (formData.lastName === "") {
+      isValid.lastName = "Овгоо оруулна уу";
+    }
+    if (formData.userName === "") {
+      isValid.userName = "Хэрэглэгчийн нэрээ оруулна уу";
+    }
+    setError(isValid);
   };
 
   return (
@@ -47,7 +41,11 @@ export const Inputs = () => {
             value={formData.firstName}
             name="firstName"
             text="Your first name"
+            error={error.firstName}
           />
+          {error.firstName !== "" && (
+            <p className="text-red-500 text-xs">{error.firstName}</p>
+          )}
         </div>
         <div className="flex flex-col gap-2">
           <Tags text={"Last Name"} />
@@ -56,7 +54,11 @@ export const Inputs = () => {
             onChange={formHandleChange}
             value={formData.lastName}
             name="lastName"
+            error={error.lastName}
           />
+          {error.lastName !== "" && (
+            <p className="text-red-500 text-xs">{error.lastName}</p>
+          )}
         </div>
         <div className="flex flex-col gap-2">
           <Tags text={"Username"} />
@@ -65,16 +67,15 @@ export const Inputs = () => {
             onChange={formHandleChange}
             value={formData.userName}
             name="userName"
+            error={error.userName}
           />
+          {error.userName !== "" && (
+            <p className="text-red-500 text-xs">{error.userName}</p>
+          )}
         </div>
       </div>
       <div>
-        <button
-          className="bg-black w-104 h-11 rounded-lg cursor-pointer"
-          onClick={formDataNames}
-        >
-          Continue 1/3
-        </button>
+        <Buttons onClick={handleNames} />
       </div>
     </div>
   );
