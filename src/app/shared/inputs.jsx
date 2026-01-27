@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Input, Tags } from "./tags";
 import { Buttons } from "./Buttons";
+import { Input, Tags } from "./tags";
 
 export const Inputs = () => {
   const [formData, setFormData] = useState({
@@ -32,7 +32,7 @@ export const Inputs = () => {
   };
 
   return (
-    <div className="flex flex-col justify-between items-center h-105">
+    <div className="flex flex-col justify-between items-center h-120">
       <div className="flex flex-col gap-3">
         <div className="flex flex-col gap-1">
           <Tags text={"First Name"} />
