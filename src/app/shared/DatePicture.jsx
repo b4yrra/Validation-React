@@ -7,6 +7,9 @@ import { PictureInput, ThirdInput } from "./ThirdInputs";
 export const DatePicture = () => {
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(null);
+  const [date, setDate] = useState(null);
+  const [error, setError] = useState("");
+
   const handlFileChange = (e) => {
     const file = e.target.files[0];
     const url = URL.createObjectURL(file);
@@ -17,11 +20,48 @@ export const DatePicture = () => {
     }
   };
 
+  const handleDateChange = (e) => {
+    const date = new Date(e.target.value);
+    setDate(date);
+    setError(date);
+  };
+
+  const handleError = () => {
+    const today = new Date();
+    const validAge = new Date();
+    validAge.setFullYear(today.getFullYear() - 18);
+
+    if (!file) {
+      setError((prev) => ({
+        ...prev,
+        file: "Профайл зурагаа оруулна уу",
+      }));
+    }
+
+    if (!date || isNaN(date.getTime())) {
+      setError((prev) => ({ ...prev, date: "Төрсөн өдрөө оруулна уу" }));
+    } else if (date > validAge) {
+      setError((prev) => ({
+        ...prev,
+        date: "Та 18 ба түүнээс дээш настай байх ёстой.",
+      }));
+    } else {
+      setError((prev) => ({ ...prev, date: "" }));
+    }
+  };
+
   return (
     <div className="flex flex-col justify-between items-center h-120">
       <div className="flex flex-col gap-5">
         <div className="flex flex-col gap-1">
-          <ThirdInput type="date" label="Date of birth" />
+          <ThirdInput
+            type="date"
+            label="Date of birth"
+            name="date"
+            onChange={handleDateChange}
+            error={error.date}
+          />
+          {error.date && <p className="text-red-500 text-xs">{error.date}</p>}
         </div>
         <div className="flex flex-col gap-2">
           <div className="text-black font-semibold text-xs">
@@ -30,7 +70,14 @@ export const DatePicture = () => {
 
           {file === null ? (
             <div className="flex flex-col gap-2">
-              <PictureInput type="file" onChange={handlFileChange} />
+              <PictureInput
+                type="file"
+                onChange={handlFileChange}
+                name="picture"
+              />
+              {error.file && (
+                <p className="text-red-500 text-xs">{error.file}</p>
+              )}
             </div>
           ) : (
             <div className="flex w-104 h-60 overflow-hidden rounded-lg bg-top justify-center items-center">
@@ -41,7 +88,7 @@ export const DatePicture = () => {
       </div>
       <div className="flex gap-2">
         <BackButton />
-        <Buttons2 />
+        <Buttons2 onClick={handleError} text="Continue 3/3" />
       </div>
     </div>
   );

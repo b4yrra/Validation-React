@@ -1,4 +1,4 @@
-export const Buttons = ({ onClick }) => {
+export const Buttons = ({ onClick, text }) => {
   return (
     <div>
       <button
@@ -11,14 +11,14 @@ export const Buttons = ({ onClick }) => {
   );
 };
 
-export const Buttons2 = ({ onClick }) => {
+export const Buttons2 = ({ onClick, text }) => {
   return (
     <div>
       <button
         className="bg-black h-11 rounded-lg cursor-pointer w-70"
         onClick={onClick}
       >
-        Continue 2/3
+        {text}
       </button>
     </div>
   );

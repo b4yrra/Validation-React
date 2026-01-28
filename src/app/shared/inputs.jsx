@@ -15,6 +15,8 @@ export const Inputs = () => {
 
   const formHandleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+
+    setError({ ...error, [e.target.name]: "" });
   };
 
   const handleNames = () => {

@@ -36,7 +36,7 @@ export const Regex = () => {
 
     if (userInfo.phone === "") {
       isValidInfo.phone = "Утасны дугаараа оруулна уу";
-    } else if (phoneLength.length < 8) {
+    } else if (phoneLength.length !== 8) {
       isValidInfo.phone = "8 оронтой дугаар оруулна уу";
     } else if (!validatePhone.test(userInfo.phone)) {
       isValidInfo.phone = "Зөв утасны дугаар оруулна уу";
@@ -114,7 +114,7 @@ export const Regex = () => {
       </div>
       <div className="flex gap-2">
         <BackButton />
-        <Buttons2 onClick={handleInfo} />
+        <Buttons2 onClick={handleInfo} text="Continue 2/3" />
       </div>
     </div>
   );
