@@ -4,13 +4,7 @@ import { useState } from "react";
 import { Buttons } from "./Buttons";
 import { Input, Tags } from "./tags";
 
-export const Inputs = ({ setStep, step }) => {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    userName: "",
-  });
-
+export const Inputs = ({ setStep, step, formData, setFormData }) => {
   const [error, setError] = useState({});
 
   const formHandleChange = (e) => {

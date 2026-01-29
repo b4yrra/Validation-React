@@ -4,10 +4,16 @@ import { useState } from "react";
 import { BackButton, Buttons2 } from "./Buttons";
 import { PictureInput, ThirdInput } from "./ThirdInputs";
 
-export const DatePicture = ({ setStep, step }) => {
-  const [file, setFile] = useState(null);
-  const [preview, setPreview] = useState(null);
-  const [date, setDate] = useState(null);
+export const DatePicture = ({
+  setStep,
+  step,
+  file,
+  setFile,
+  preview,
+  setPreview,
+  date,
+  setDate,
+}) => {
   const [error, setError] = useState("");
 
   const handlFileChange = (e) => {
@@ -24,6 +30,10 @@ export const DatePicture = ({ setStep, step }) => {
     const date = new Date(e.target.value);
     setDate(date);
     setError(date);
+  };
+
+  const picDeleteButton = () => {
+    setFile(null);
   };
 
   const handleError = () => {
@@ -93,8 +103,14 @@ export const DatePicture = ({ setStep, step }) => {
               )}
             </div>
           ) : (
-            <div className="flex w-104 h-60 overflow-hidden rounded-lg bg-top justify-center items-center">
+            <div className="flex w-104 h-60 overflow-hidden rounded-lg bg-top justify-center items-center relative">
               <img className="" src={preview} />
+              <button
+                onClick={picDeleteButton}
+                className="bg-black absolute cursor-pointer px-2 rounded-full top-5 right-5 justify-center items-center"
+              >
+                x
+              </button>
             </div>
           )}
         </div>

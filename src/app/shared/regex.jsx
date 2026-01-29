@@ -4,14 +4,7 @@ import { useState } from "react";
 import { RegexInputs } from "./regexInputs";
 import { BackButton, Buttons2 } from "./Buttons";
 
-export const Regex = ({ setStep, step }) => {
-  const [userInfo, setUserInfo] = useState({
-    email: "",
-    phone: "",
-    password: "",
-    confirmPassword: "",
-  });
-
+export const Regex = ({ setStep, step, userInfo, setUserInfo }) => {
   const [errorInfo, setErrorInfo] = useState({});
 
   const validateEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

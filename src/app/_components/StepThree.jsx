@@ -2,7 +2,16 @@ import { useState } from "react";
 import { Header } from "../shared/header";
 import { DatePicture } from "../shared/DatePicture";
 
-export const StepThree = ({ setStep, step }) => {
+export const StepThree = ({
+  setStep,
+  step,
+  file,
+  setFile,
+  preview,
+  setPreview,
+  date,
+  setDate,
+}) => {
   return (
     <div className="bg-white w-120 h-180 rounded-lg">
       <div className="flex justify-center items-center h-50">
@@ -12,7 +21,16 @@ export const StepThree = ({ setStep, step }) => {
         />
       </div>
       <div>
-        <DatePicture setStep={setStep} step={step} />
+        <DatePicture
+          setStep={setStep}
+          step={step}
+          file={file}
+          setFile={setFile}
+          preview={preview}
+          setPreview={setPreview}
+          date={date}
+          setDate={setDate}
+        />
       </div>
     </div>
   );
