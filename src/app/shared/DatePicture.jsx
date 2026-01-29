@@ -4,7 +4,7 @@ import { useState } from "react";
 import { BackButton, Buttons2 } from "./Buttons";
 import { PictureInput, ThirdInput } from "./ThirdInputs";
 
-export const DatePicture = () => {
+export const DatePicture = ({ setStep, step }) => {
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(null);
   const [date, setDate] = useState(null);
@@ -31,23 +31,36 @@ export const DatePicture = () => {
     const validAge = new Date();
     validAge.setFullYear(today.getFullYear() - 18);
 
+    let errorValue = false;
+
     if (!file) {
       setError((prev) => ({
         ...prev,
         file: "Профайл зурагаа оруулна уу",
       }));
+      errorValue = true;
     }
 
     if (!date || isNaN(date.getTime())) {
       setError((prev) => ({ ...prev, date: "Төрсөн өдрөө оруулна уу" }));
+      errorValue = true;
     } else if (date > validAge) {
       setError((prev) => ({
         ...prev,
         date: "Та 18 ба түүнээс дээш настай байх ёстой.",
       }));
+      errorValue = true;
     } else {
       setError((prev) => ({ ...prev, date: "" }));
     }
+
+    if (!errorValue) {
+      setStep(step + 1);
+    }
+  };
+
+  const backButton = () => {
+    setStep(step - 1);
   };
 
   return (
@@ -87,7 +100,7 @@ export const DatePicture = () => {
         </div>
       </div>
       <div className="flex gap-2">
-        <BackButton />
+        <BackButton onClick={backButton} />
         <Buttons2 onClick={handleError} text="Continue 3/3" />
       </div>
     </div>

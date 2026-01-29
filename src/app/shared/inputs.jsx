@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Buttons } from "./Buttons";
 import { Input, Tags } from "./tags";
 
-export const Inputs = () => {
+export const Inputs = ({ setStep, step }) => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -30,7 +30,12 @@ export const Inputs = () => {
     if (formData.userName === "") {
       isValid.userName = "Хэрэглэгчийн нэрээ оруулна уу";
     }
-    setError(isValid);
+
+    if (Object.keys(isValid).length === 0) {
+      setStep(step + 1);
+    } else {
+      setError(isValid);
+    }
   };
 
   return (

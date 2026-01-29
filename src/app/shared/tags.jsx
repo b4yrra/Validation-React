@@ -11,8 +11,6 @@ export const Tags = ({ text }) => {
 };
 
 export const Input = ({ text, onChange, value, name, error }) => {
-  console.log(error);
-
   return (
     <div>
       <input

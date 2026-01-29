@@ -4,7 +4,7 @@ import { useState } from "react";
 import { RegexInputs } from "./regexInputs";
 import { BackButton, Buttons2 } from "./Buttons";
 
-export const Regex = () => {
+export const Regex = ({ setStep, step }) => {
   const [userInfo, setUserInfo] = useState({
     email: "",
     phone: "",
@@ -54,7 +54,15 @@ export const Regex = () => {
       isValidInfo.confirmPassword = "Таны оруулсан нууц үг таарахгүй байна";
     }
 
-    setErrorInfo(isValidInfo);
+    if (Object.keys(isValidInfo).length === 0) {
+      setStep(step + 1);
+    } else {
+      setErrorInfo(isValidInfo);
+    }
+  };
+
+  const backButton = () => {
+    setStep(step - 1);
   };
 
   return (
@@ -113,7 +121,7 @@ export const Regex = () => {
         </div>
       </div>
       <div className="flex gap-2">
-        <BackButton />
+        <BackButton onClick={backButton} />
         <Buttons2 onClick={handleInfo} text="Continue 2/3" />
       </div>
     </div>
